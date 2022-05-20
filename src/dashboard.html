@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-gray-100">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/b454cb32e4.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.5/dist/flowbite.min.css" />
+    <link href="/dist/output.css" rel="stylesheet">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="h-full">
+    <div class="min-h-full">
+        <app-navbar></app-navbar>
+
+        <header class="bg-white shadow">
+            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <h1 class="text-3xl font-bold text-gray-900">Dashboard</h1>
+            </div>
+        </header>
+
+        <main>
+            <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+                <div class="bg-white">
+                    <div class="max-w-2xl mx-auto py-10 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+
+                        <div id="map" class="rounded-md"></div>
+
+                        <div class="flex flex-row justify-start mt-3">
+                            <!-- Search Bar -->
+                            <div class="pt-2 relative text-gray-600">
+                                <input
+                                    class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+                                    type="search" name="search" placeholder="Search">
+                                <button type="submit" class="absolute right-0 top-0 mt-5 mr-4">
+                                    <svg class="text-gray-600 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px"
+                                        y="0px" viewBox="0 0 56.966 56.966"
+                                        style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
+                                        width="512px" height="512px">
+                                        <path
+                                            d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <!-- Filter Buttons -->
+                            <div class="flex justify-center ml-5 pt-2 relative">
+                                <div class="flex flex-col mr-2">
+                                    <button
+                                        class="disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed mr-2 inline-flex items-center p-2 w-44 border-transparent tracking-wide text-xs rounded-md shadow-sm text-black font-bold border-teal-600 border-2 hover:bg-teal-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 focus:bg-teal-700 focus:text-white">Beds
+                                        & Baths
+                                    </button>
+
+                                    <div id="dropdown"
+                                        class="z-10 divide-y divide-gray-100 rounded shadow w-auto p-3 border-2 mt-2">
+                                        <ul class="py-1 text-xs text-black font-bold" aria-labelledby="dropdownDefault">
+                                            <p class="mb-2 tracking-wider">Bedrooms</p>
+                                            <li>
+                                                <a href="#" aria-current="page"
+                                                    class="z-10 bg-indigo-50 border-teal-500 text-teal-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium rounded">
+                                                    Any </a>
+                                                <a href="#"
+                                                    class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium rounded">
+                                                    1 </a>
+                                                <a href="#"
+                                                    class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium rounded">
+                                                    2 </a>
+                                                <a href="#"
+                                                    class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium rounded">
+                                                    3 </a>
+                                                <a href="#"
+                                                    class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium rounded">
+                                                    4 </a>
+                                                <a href="#"
+                                                    class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium rounded">
+                                                    5 </a>
+                                            </li>
+
+                                            <p class="my-2 tracking-wider">Bathrooms</p>
+                                            <li>
+                                                <a href="#" aria-current="page"
+                                                    class="z-10 bg-indigo-50 border-teal-500 text-teal-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium rounded">
+                                                    Any </a>
+                                                <a href="#"
+                                                    class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium rounded">
+                                                    1 </a>
+                                                <a href="#"
+                                                    class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium rounded">
+                                                    2 </a>
+                                                <a href="#"
+                                                    class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium rounded">
+                                                    3 </a>
+                                                <a href="#"
+                                                    class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium rounded">
+                                                    4 </a>
+                                                <a href="#"
+                                                    class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium rounded">
+                                                    5 </a>
+                                            </li>
+                                            <li class="flex justify-end mt-4">
+                                                <button
+                                                    class=" disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed p-2 border-transparent tracking-wide text-sm rounded-md shadow-lg text-white bg-teal-600 font-bold hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:bg-teal-700 focus:text-white">Apply
+                                                </button>
+                                            </li>
+                                        </ul>
+                                        <ul class="bg-slate-300"></ul>
+                                    </div>
+                                </div>
+
+
+                                <button
+                                    class="disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed mr-2 inline-flex items-center px-2 border-transparent tracking-wide text-xs rounded-md shadow-sm text-black font-bold border-teal-600 border-2 hover:bg-teal-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 focus:bg-teal-700 focus:text-white">Price</button>
+                                <button
+                                    class="disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed mr-2 inline-flex items-center px-2 border-transparent tracking-wide text-xs rounded-md shadow-sm text-black font-bold border-teal-600 border-2 hover:bg-teal-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 focus:bg-teal-700 focus:text-white">Home
+                                    Style</button>
+                                <button
+                                    class="disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed mr-2 inline-flex items-center px-2 border-transparent tracking-wide text-xs rounded-md shadow-sm text-white font-bold border-teal-600  bg-teal-600 border-2 hover:bg-teal-500 hover:border-teal-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 ">More</button>
+                            </div>
+                        </div>
+
+                        <!-- <div class="flex">
+                            <div class=" mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                                role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                                <div class="py-1" role="none">
+                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem"
+                                        tabindex="-1" id="menu-item-0">Account settings</a>
+                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem"
+                                        tabindex="-1" id="menu-item-1">Support</a>
+                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem"
+                                        tabindex="-1" id="menu-item-2">License</a>
+                                    <form method="POST" action="#" role="none">
+                                        <button type="submit"
+                                            class="text-gray-700 block w-full text-left px-4 py-2 text-sm"
+                                            role="menuitem" tabindex="-1" id="menu-item-3">Sign out</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <!-- Card List -->
+                        <div class="flex inset-0">
+                            <div class="p-10 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none" id="nft-list">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+
+    <app-footer></app-footer>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.js"></script>
+    <script src="./index.js" type="module"></script>
+</body>
+
+</html>
