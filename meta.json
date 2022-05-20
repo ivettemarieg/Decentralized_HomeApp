@@ -1,0 +1,26 @@
+[
+    {
+        "name": "House by the Lake",
+        "description": "4 bds 2 ba 1,496 sqft",
+        "home_address": "5678 FakeAddress Dr., Whoville, PA 12345",
+        "price": "20"
+    },
+    {
+        "name": "TreeHouse",
+        "description": "10 bds 7 ba 10,002 sqft",
+        "home_address": "1234 FakeAddress Dr., Whoville, PA 12345",
+        "price": "100"
+    },
+    {
+        "name": "TreeHouse",
+        "description": "10 bds 7 ba 10,002 sqft",
+        "home_address": "1234 FakeAddress Dr., Whoville, PA 12345",
+        "price": "100"
+    },
+    {
+        "name": "TreeHouse",
+        "description": "10 bds 7 ba 10,002 sqft",
+        "home_address": "1234 FakeAddress Dr., Whoville, PA 12345",
+        "price": "100"
+    }
+]
