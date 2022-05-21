@@ -275,11 +275,34 @@ for (var i in nftData) {
     nftList.appendChild(newCard);
 }
 
+// Map
 mapboxgl.accessToken = '<Your_Key>';
 const map = new mapboxgl.Map({
-    container: 'map', // container ID
-    style: 'mapbox://styles/mapbox/satellite-streets-v11', // style URL
-    center: [-74.5, 40], // starting position [lng, lat]
-    zoom: 3// starting zoom
+    container: 'map',
+    style: 'mapbox://styles/mapbox/satellite-streets-v11',
+    center: [-74.5, 40],
+    zoom: 3
 });
 
+// Dropdown Filters
+
+const bbButton = document.getElementById("bbButton")
+const bbdropdown = document.getElementById("bb_dropdown");
+
+bbButton.addEventListener("click", function () {
+    bbdropdown.classList.toggle("hidden");
+})
+
+const priceBtn = document.getElementById("priceBtn");
+const priceDropdown = document.getElementById("price_dropdown");
+
+priceBtn.addEventListener("click", function () {
+    priceDropdown.classList.toggle("hidden");
+})
+
+const homeStyleBtn = document.getElementById("homeStyleBtn");
+const homeStyleDropdown = document.getElementById("homeStyleDropdown");
+
+homeStyleBtn.addEventListener("click", function () {
+    homeStyleDropdown.classList.toggle("hidden");
+})
