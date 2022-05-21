@@ -20,7 +20,7 @@
 
         <header class="bg-white shadow">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                <h1 class="text-3xl font-bold text-gray-900">Dashboard</h1>
+                <h1 class="text-3xl font-bold text-gray-900 italic">Find your new house</h1>
             </div>
         </header>
 
@@ -28,8 +28,6 @@
             <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
                 <div class="bg-white">
                     <div class="max-w-2xl mx-auto py-10 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-
-                        <div id="map" class="rounded-md"></div>
 
                         <div class="flex flex-row justify-start mt-3">
                             <!-- Search Bar -->
@@ -50,17 +48,18 @@
                             </div>
 
                             <!-- Filter Buttons -->
-                            <div class="flex justify-center ml-5 pt-2 relative">
-                                <div class="flex flex-col mr-2">
-                                    <button
-                                        class="disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed mr-2 inline-flex items-center p-2 w-44 border-transparent tracking-wide text-xs rounded-md shadow-sm text-black font-bold border-teal-600 border-2 hover:bg-teal-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 focus:bg-teal-700 focus:text-white">Beds
+                            <div class="flex justify-center ml-2 pt-2 relative">
+                                <!-- Bed and Baths -->
+                                <div class="flex flex-col">
+                                    <button id="bbButton"
+                                        class="disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed mr-2 hidden md:inline-flex items-center text-center p-2 border-transparent tracking-wide text-sm rounded-md shadow-sm text-white font-semibold bg-teal-600 border-teal-600 border-2 hover:bg-teal-500 hover:border-teal-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 focus:bg-teal-500 focus:border-teal-500">Beds
                                         & Baths
                                     </button>
 
-                                    <div id="dropdown"
-                                        class="z-10 divide-y divide-gray-100 rounded shadow w-auto p-3 border-2 mt-2">
-                                        <ul class="py-1 text-xs text-black font-bold" aria-labelledby="dropdownDefault">
-                                            <p class="mb-2 tracking-wider">Bedrooms</p>
+                                    <div id="bb_dropdown"
+                                        class="z-10 absolute hidden divide-y top-12 bg-white divide-gray-100 rounded shadow w-auto p-3 border-2 mt-2">
+                                        <ul class="py-1 text-black" aria-labelledby="dropdownDefault">
+                                            <p class="mb-2 font-semibold">Bedrooms</p>
                                             <li>
                                                 <a href="#" aria-current="page"
                                                     class="z-10 bg-indigo-50 border-teal-500 text-teal-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium rounded">
@@ -82,7 +81,7 @@
                                                     5 </a>
                                             </li>
 
-                                            <p class="my-2 tracking-wider">Bathrooms</p>
+                                            <p class="my-2 font-semibold">Bathrooms</p>
                                             <li>
                                                 <a href="#" aria-current="page"
                                                     class="z-10 bg-indigo-50 border-teal-500 text-teal-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium rounded">
@@ -105,43 +104,180 @@
                                             </li>
                                             <li class="flex justify-end mt-4">
                                                 <button
-                                                    class=" disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed p-2 border-transparent tracking-wide text-sm rounded-md shadow-lg text-white bg-teal-600 font-bold hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:bg-teal-700 focus:text-white">Apply
+                                                    class="disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed mr-2 hidden md:inline-flex items-center text-center p-2 border-transparent tracking-wide text-sm rounded-md shadow-sm text-white font-semibold bg-teal-600 border-teal-600 border-2 hover:bg-teal-500 hover:border-teal-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 focus:bg-teal-500 focus:border-teal-500">Apply
                                                 </button>
                                             </li>
                                         </ul>
-                                        <ul class="bg-slate-300"></ul>
                                     </div>
                                 </div>
+                                <!-- Prices -->
+                                <div class="flex flex-col">
+                                    <button id="priceBtn"
+                                        class="disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed mr-2 hidden md:inline-flex items-center text-center p-2 border-transparent tracking-wide text-sm rounded-md shadow-sm text-white font-semibold bg-teal-600 border-teal-600 border-2 hover:bg-teal-500 hover:border-teal-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 focus:bg-teal-500 focus:border-teal-500">Price</button>
 
+                                    <div id="price_dropdown"
+                                        class="z-10 absolute hidden divide-y top-12 bg-white divide-gray-100 rounded shadow w-auto p-3 border-2 mt-2">
+                                        <p class="font-semibold">Price Range</p>
+                                        <ul class="py-1 text-xs font-bold" aria-labelledby="dropdownDefault">
+                                            <li class="flex flex-row">
+                                                <input
+                                                    class="border shadow rounded w-2/4 text-sm p-2 focus bg-indigo-50 border-teal-500 placeholder-teal-600 placeholder:font-semibold"
+                                                    placeholder="Min">
+                                                <span class="text-lg m-2 px-2 scale-x-150">-</span>
+                                                <input
+                                                    class="border shadow rounded w-2/4 text-sm p-2 focus bg-indigo-50 border-teal-500 placeholder-teal-600 placeholder:font-semibold"
+                                                    placeholder="Max">
+                                            </li>
 
+                                            <div class="flex flex-row justify-between">
+                                                <li class="flex flex-col">
+                                                    <ul class="mt-3">
+                                                        <li><button
+                                                                class="text-base ml-2 mb-2 hover:text-teal-700 hover:scale-110 ease-in-out duration-300 focus:text-teal-700 focus:scale-110">50
+                                                                <i class="fa-brands fa-ethereum"></i></button></li>
+                                                        <li><button
+                                                                class="text-base ml-2 mb-2 hover:text-teal-700 hover:scale-110 ease-in-out duration-300 focus:text-teal-700 focus:scale-110">100
+                                                                <i class="fa-brands fa-ethereum"></i></button></li>
+                                                        <li><button
+                                                                class="text-base ml-2 mb-2 hover:text-teal-700 hover:scale-110 ease-in-out duration-300 focus:text-teal-700 focus:scale-110">150
+                                                                <i class="fa-brands fa-ethereum"></i></button></li>
+                                                        <li><button
+                                                                class="text-base ml-2 mb-2 hover:text-teal-700 hover:scale-110 ease-in-out duration-300 focus:text-teal-700 focus:scale-110">200
+                                                                <i class="fa-brands fa-ethereum"></i></button></li>
+                                                        <li><button
+                                                                class="text-base ml-2 mb-2 hover:text-teal-700 hover:scale-110 ease-in-out duration-300 focus:text-teal-700 focus:scale-110">250
+                                                                <i class="fa-brands fa-ethereum"></i></button></li>
+                                                        <li><button
+                                                                class="text-base ml-2 mb-2 hover:text-teal-700 hover:scale-110 ease-in-out duration-300 focus:text-teal-700 focus:scale-110">300
+                                                                <i class="fa-brands fa-ethereum"></i></button></li>
+                                                        <li><button
+                                                                class="text-base ml-2 mb-2 hover:text-teal-700 hover:scale-110 ease-in-out duration-300 focus:text-teal-700 focus:scale-110">350
+                                                                <i class="fa-brands fa-ethereum"></i></button></li>
+                                                        <li><button
+                                                                class="text-base ml-2 mb-2 hover:text-teal-700 hover:scale-110 ease-in-out duration-300 focus:text-teal-700 focus:scale-110">400
+                                                                <i class="fa-brands fa-ethereum"></i></button></li>
+                                                        <li><button
+                                                                class="text-base ml-2 mb-2 hover:text-teal-700 hover:scale-110 ease-in-out duration-300 focus:text-teal-700 focus:scale-110">450
+                                                                <i class="fa-brands fa-ethereum"></i></button></li>
+                                                        <li><button
+                                                                class="text-base ml-2 hover:text-teal-700 hover:scale-110 ease-in-out duration-300 focus:text-teal-700 focus:scale-110">Any
+                                                                Price
+                                                        </li>
+                                                    </ul>
+                                                </li>
+
+                                                <li class="flex flex-col">
+                                                    <ul class="mt-3">
+                                                        <li><button
+                                                                class="text-base ml-2 mb-2 hover:text-teal-700 hover:scale-110 ease-in-out duration-300 focus:text-teal-700 focus:scale-110">50
+                                                                <i class="fa-brands fa-ethereum"></i></button></li>
+                                                        <li><button
+                                                                class="text-base ml-2 mb-2 hover:text-teal-700 hover:scale-110 ease-in-out duration-300 focus:text-teal-700 focus:scale-110">100
+                                                                <i class="fa-brands fa-ethereum"></i></button></li>
+                                                        <li><button
+                                                                class="text-base ml-2 mb-2 hover:text-teal-700 hover:scale-110 ease-in-out duration-300 focus:text-teal-700 focus:scale-110">150
+                                                                <i class="fa-brands fa-ethereum"></i></button></li>
+                                                        <li><button
+                                                                class="text-base ml-2 mb-2 hover:text-teal-700 hover:scale-110 ease-in-out duration-300 focus:text-teal-700 focus:scale-110">200
+                                                                <i class="fa-brands fa-ethereum"></i></button></li>
+                                                        <li><button
+                                                                class="text-base ml-2 mb-2 hover:text-teal-700 hover:scale-110 ease-in-out duration-300 focus:text-teal-700 focus:scale-110">250
+                                                                <i class="fa-brands fa-ethereum"></i></button></li>
+                                                        <li><button
+                                                                class="text-base ml-2 mb-2 hover:text-teal-700 hover:scale-110 ease-in-out duration-300 focus:text-teal-700 focus:scale-110">300
+                                                                <i class="fa-brands fa-ethereum"></i></button></li>
+                                                        <li><button
+                                                                class="text-base ml-2 mb-2 hover:text-teal-700 hover:scale-110 ease-in-out duration-300 focus:text-teal-700 focus:scale-110">350
+                                                                <i class="fa-brands fa-ethereum"></i></button></li>
+                                                        <li><button
+                                                                class="text-base ml-2 mb-2 hover:text-teal-700 hover:scale-110 ease-in-out duration-300 focus:text-teal-700 focus:scale-110">400
+                                                                <i class="fa-brands fa-ethereum"></i></button></li>
+                                                        <li><button
+                                                                class="text-base ml-2 mb-2 hover:text-teal-700 hover:scale-110 ease-in-out duration-300 focus:text-teal-700 focus:scale-110">450
+                                                                <i class="fa-brands fa-ethereum"></i></button></li>
+                                                        <li><button
+                                                                class="text-base ml-2 hover:text-teal-700 hover:scale-110 ease-in-out duration-300 focus:text-teal-700 focus:scale-110">Any
+                                                                Price
+                                                        </li>
+                                                    </ul>
+                                                </li>
+
+                                            </div>
+
+                                            <li class="flex justify-end mt-4">
+                                                <button
+                                                    class=" disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed mr-2 hidden md:inline-flex items-center text-center p-2 border-transparent tracking-wide text-sm rounded-md shadow-sm text-white font-semibold bg-teal-600 border-teal-600 border-2 hover:bg-teal-500 hover:border-teal-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 focus:bg-teal-500 focus:border-teal-500">Apply
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- Home Styles -->
+                                <div class="flex flex-col">
+                                    <button id="homeStyleBtn"
+                                        class="disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed mr-2 hidden md:inline-flex items-center text-center p-2 border-transparent tracking-wide text-sm rounded-md shadow-sm text-white font-semibold bg-teal-600 border-teal-600 border-2 hover:bg-teal-500 hover:border-teal-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 focus:bg-teal-500 focus:border-teal-500">Home
+                                        Style</button>
+
+                                    <div id="homeStyleDropdown"
+                                        class="z-10 absolute hidden divide-y top-12 bg-white divide-gray-100 rounded shadow w-auto p-3  border-2 mt-2">
+
+                                        <p class="font-semibold">Home Styles</p>
+                                        <form action="" class="flex flex-col items-center justify-center">
+                                            <div class="flex flex-col">
+                                                <label class="inline-flex items-center mt-3">
+                                                    <input type="checkbox"
+                                                        class="form-radio h-5 w-5 rounded-md border-teal-700 checked:bg-teal-600 focus:ring-teal-600"><span
+                                                        class="ml-2 text-gray-700">Houses</span>
+                                                </label>
+                                                <label class="inline-flex items-center mt-3">
+                                                    <input type="checkbox"
+                                                        class="form-radio h-5 w-5 rounded-md border-teal-700 checked:bg-teal-600 focus:ring-teal-600"><span
+                                                        class="ml-2 text-gray-700">Cabins</span>
+                                                </label>
+                                                <label class="inline-flex items-center mt-3">
+                                                    <input type="checkbox"
+                                                        class="form-radio h-5 w-5 rounded-md border-teal-700 checked:bg-teal-600 focus:ring-teal-600"><span
+                                                        class="ml-2 text-gray-700">Apartments</span>
+                                                </label>
+                                                <label class="inline-flex items-center mt-3">
+                                                    <input type="checkbox"
+                                                        class="form-radio h-5 w-5 rounded-md border-teal-700 checked:bg-teal-600 focus:ring-teal-600"><span
+                                                        class="ml-2 text-gray-700">Townhomes</span>
+                                                </label>
+                                                <label class="inline-flex items-center mt-3">
+                                                    <input type="checkbox"
+                                                        class="form-radio h-5 w-5 rounded-md border-teal-700 checked:bg-teal-600 focus:ring-teal-600"><span
+                                                        class="ml-2 text-gray-700">Multi-family</span>
+                                                </label>
+                                                <label class="inline-flex items-center mt-3">
+                                                    <input type="checkbox"
+                                                        class="form-radio h-5 w-5 rounded-md border-teal-700 checked:bg-teal-600 focus:ring-teal-600"><span
+                                                        class="ml-2 text-gray-700">Lots/Land</span>
+                                                </label>
+                                                <label class="inline-flex items-center mt-3">
+                                                    <input type="checkbox"
+                                                        class="form-radio h-5 w-5 rounded-md border-teal-700 checked:bg-teal-600 focus:ring-teal-600"><span
+                                                        class="ml-2 text-gray-700">Commercial</span>
+                                                </label>
+
+                                            </div>
+                                        </form>
+
+                                        <li class="flex justify-end mt-4">
+                                            <button
+                                                class=" disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed mr-2 hidden md:inline-flex items-center text-center p-2 border-transparent tracking-wide text-sm rounded-md shadow-sm text-white font-semibold bg-teal-600 border-teal-600 border-2 hover:bg-teal-500 hover:border-teal-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 focus:bg-teal-500 focus:border-teal-500">Apply
+                                            </button>
+                                        </li>
+
+                                    </div>
+
+                                </div>
                                 <button
-                                    class="disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed mr-2 inline-flex items-center px-2 border-transparent tracking-wide text-xs rounded-md shadow-sm text-black font-bold border-teal-600 border-2 hover:bg-teal-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 focus:bg-teal-700 focus:text-white">Price</button>
-                                <button
-                                    class="disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed mr-2 inline-flex items-center px-2 border-transparent tracking-wide text-xs rounded-md shadow-sm text-black font-bold border-teal-600 border-2 hover:bg-teal-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 focus:bg-teal-700 focus:text-white">Home
-                                    Style</button>
-                                <button
-                                    class="disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed mr-2 inline-flex items-center px-2 border-transparent tracking-wide text-xs rounded-md shadow-sm text-white font-bold border-teal-600  bg-teal-600 border-2 hover:bg-teal-500 hover:border-teal-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 ">More</button>
+                                    class="disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed mr-2 inline-flex items-center px-2 border-transparent tracking-wide rounded-md shadow-sm text-sm text-white bg-teal-600 font-semibold border-teal-600 border-2 hover:bg-teal-500 hover:border-teal-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 ">More</button>
                             </div>
                         </div>
 
-                        <!-- <div class="flex">
-                            <div class=" mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                                role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-                                <div class="py-1" role="none">
-                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem"
-                                        tabindex="-1" id="menu-item-0">Account settings</a>
-                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem"
-                                        tabindex="-1" id="menu-item-1">Support</a>
-                                    <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem"
-                                        tabindex="-1" id="menu-item-2">License</a>
-                                    <form method="POST" action="#" role="none">
-                                        <button type="submit"
-                                            class="text-gray-700 block w-full text-left px-4 py-2 text-sm"
-                                            role="menuitem" tabindex="-1" id="menu-item-3">Sign out</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div> -->
+                        <div id="map" class="rounded-md mt-7"></div>
 
                         <!-- Card List -->
                         <div class="flex inset-0">
