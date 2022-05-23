@@ -104,7 +104,7 @@
                                             </li>
                                             <li class="flex justify-end mt-4">
                                                 <button
-                                                    class="disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed mr-2 hidden md:inline-flex items-center text-center p-2 border-transparent tracking-wide text-sm rounded-md shadow-sm text-white font-semibold bg-teal-600 border-teal-600 border-2 hover:bg-teal-500 hover:border-teal-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 focus:bg-teal-500 focus:border-teal-500">Apply
+                                                    class="disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed hidden md:inline-flex items-center text-center p-2 border-transparent tracking-wide text-sm rounded-md shadow-sm text-white font-semibold bg-teal-600 border-teal-600 border-2 hover:bg-teal-500 hover:border-teal-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 focus:bg-teal-500 focus:border-teal-500">Apply
                                                 </button>
                                             </li>
                                         </ul>
@@ -219,44 +219,53 @@
                                         Style</button>
 
                                     <div id="homeStyleDropdown"
-                                        class="z-10 absolute hidden divide-y top-12 bg-white divide-gray-100 rounded shadow w-auto p-3  border-2 mt-2">
+                                        class="z-10 absolute hidden divide-y top-12 bg-white divide-gray-100 rounded shadow w-fit p-3  border-2 mt-2">
 
                                         <p class="font-semibold">Home Styles</p>
+
                                         <form action="" class="flex flex-col items-center justify-center">
                                             <div class="flex flex-col">
                                                 <label class="inline-flex items-center mt-3">
-                                                    <input type="checkbox"
+                                                    <input type="checkbox" id="selectAllbtn"
                                                         class="form-radio h-5 w-5 rounded-md border-teal-700 checked:bg-teal-600 focus:ring-teal-600"><span
-                                                        class="ml-2 text-gray-700">Houses</span>
+                                                        class="ml-2 text-gray-700 font-bold italic"
+                                                        id="selectAll">Select
+                                                        All</span>
+                                                </label>
+
+                                                <label class="inline-flex items-center mt-3">
+                                                    <input type="checkbox"
+                                                        class="home-choices form-radio h-5 w-5 rounded-md border-teal-700 checked:bg-teal-600 focus:ring-teal-600"><span
+                                                        class="ml-2 text-gray-700" id="selectAll">Houses</span>
                                                 </label>
                                                 <label class="inline-flex items-center mt-3">
                                                     <input type="checkbox"
-                                                        class="form-radio h-5 w-5 rounded-md border-teal-700 checked:bg-teal-600 focus:ring-teal-600"><span
+                                                        class="home-choices form-radio h-5 w-5 rounded-md border-teal-700 checked:bg-teal-600 focus:ring-teal-600"><span
                                                         class="ml-2 text-gray-700">Cabins</span>
                                                 </label>
                                                 <label class="inline-flex items-center mt-3">
                                                     <input type="checkbox"
-                                                        class="form-radio h-5 w-5 rounded-md border-teal-700 checked:bg-teal-600 focus:ring-teal-600"><span
+                                                        class="home-choices form-radio h-5 w-5 rounded-md border-teal-700 checked:bg-teal-600 focus:ring-teal-600"><span
                                                         class="ml-2 text-gray-700">Apartments</span>
                                                 </label>
                                                 <label class="inline-flex items-center mt-3">
                                                     <input type="checkbox"
-                                                        class="form-radio h-5 w-5 rounded-md border-teal-700 checked:bg-teal-600 focus:ring-teal-600"><span
+                                                        class="home-choices form-radio h-5 w-5 rounded-md border-teal-700 checked:bg-teal-600 focus:ring-teal-600"><span
                                                         class="ml-2 text-gray-700">Townhomes</span>
                                                 </label>
                                                 <label class="inline-flex items-center mt-3">
                                                     <input type="checkbox"
-                                                        class="form-radio h-5 w-5 rounded-md border-teal-700 checked:bg-teal-600 focus:ring-teal-600"><span
+                                                        class="home-choices form-radio h-5 w-5 rounded-md border-teal-700 checked:bg-teal-600 focus:ring-teal-600"><span
                                                         class="ml-2 text-gray-700">Multi-family</span>
                                                 </label>
                                                 <label class="inline-flex items-center mt-3">
                                                     <input type="checkbox"
-                                                        class="form-radio h-5 w-5 rounded-md border-teal-700 checked:bg-teal-600 focus:ring-teal-600"><span
+                                                        class="home-choices form-radio h-5 w-5 rounded-md border-teal-700 checked:bg-teal-600 focus:ring-teal-600"><span
                                                         class="ml-2 text-gray-700">Lots/Land</span>
                                                 </label>
                                                 <label class="inline-flex items-center mt-3">
                                                     <input type="checkbox"
-                                                        class="form-radio h-5 w-5 rounded-md border-teal-700 checked:bg-teal-600 focus:ring-teal-600"><span
+                                                        class="home-choices form-radio h-5 w-5 rounded-md border-teal-700 checked:bg-teal-600 focus:ring-teal-600"><span
                                                         class="ml-2 text-gray-700">Commercial</span>
                                                 </label>
 
@@ -265,15 +274,138 @@
 
                                         <li class="flex justify-end mt-4">
                                             <button
-                                                class=" disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed mr-2 hidden md:inline-flex items-center text-center p-2 border-transparent tracking-wide text-sm rounded-md shadow-sm text-white font-semibold bg-teal-600 border-teal-600 border-2 hover:bg-teal-500 hover:border-teal-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 focus:bg-teal-500 focus:border-teal-500">Apply
+                                                class=" disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed hidden md:inline-flex items-center text-center p-2 border-transparent tracking-wide text-sm rounded-md shadow-sm text-white font-semibold bg-teal-600 border-teal-600 border-2 hover:bg-teal-500 hover:border-teal-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 focus:bg-teal-500 focus:border-teal-500">Apply
                                             </button>
                                         </li>
 
                                     </div>
 
                                 </div>
-                                <button
-                                    class="disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed mr-2 inline-flex items-center px-2 border-transparent tracking-wide rounded-md shadow-sm text-sm text-white bg-teal-600 font-semibold border-teal-600 border-2 hover:bg-teal-500 hover:border-teal-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 ">More</button>
+                                <!-- More Filters -->
+                                <div class="flex flex-col">
+                                    <button id="moreBtn"
+                                        class="disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed mr-2 inline-flex items-center p-2 border-transparent tracking-wide rounded-md shadow-sm text-sm text-white bg-teal-600 font-semibold border-teal-600 border-2 hover:bg-teal-500 hover:border-teal-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 ">More</button>
+
+                                    <div id="moreDropdown"
+                                        class="z-10  hidden absolute divide-y top-12 bg-white divide-gray-100 rounded shadow w-full p-3 border-2 mt-2">
+
+                                        <p class="font-semibold">More Filters</p>
+
+                                        <form action="" class="flex flex-col mt-2">
+                                            <div class="flex flex-row mb-3">
+                                                <p class="w-36">Max HOA</p>
+
+                                                <select name="hoa" id="hoa"
+                                                    class="w-44 rounded-md shadow border-2 bg-indigo-50 border-teal-500 focus:border-teal-500 text-teal-600 font-semibold text-left">
+                                                    <option value="anyHoa">Any</option>
+                                                    <option value="noHoa">No fee</option>
+                                                    <option value="50M">$50/month</option>
+                                                    <option value="100M">$100/month</option>
+                                                    <option value="200M">$200/month</option>
+                                                    <option value="300M">$300/month</option>
+                                                    <option value="400M">$400/month</option>
+                                                    <option value="500M">$500/month</option>
+                                                    <option value="600M">$600/month</option>
+                                                    <option value="700M">$700/month</option>
+                                                    <option value="800M">$800/month</option>
+                                                    <option value="900M">$900/month</option>
+                                                    <option value="1000M">$1000/month</option>
+                                                </select>
+
+                                            </div>
+
+                                            <div class="flex flex-row">
+                                                <p class="w-44 mb-14">Parking Spots</p>
+
+                                                <div class="flex flex-col">
+                                                    <select name="parking" id="parking"
+                                                        class="w-44 rounded-md shadow border-2 bg-indigo-50 border-teal-500 focus:border-teal-500 text-teal-600 font-semibold text-left">
+                                                        <option value="anyParking">Any</option>
+                                                        <option value="1Parking">1 +</option>
+                                                        <option value="2Parking">2 +</option>
+                                                        <option value="3Parking">3 +</option>
+                                                    </select>
+                                                    <label class="mt-3">
+                                                        <input type="checkbox" id="selectAllbtn"
+                                                            class="form-radio h-5 w-5 rounded-md bg-indigo-50 border-teal-700 checked:bg-teal-600 focus:ring-teal-600"><span
+                                                            class="ml-2 text-gray-700 font-bold" id="selectAll">Must
+                                                            have garage</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="flex flex-row">
+                                                <p class="w-full mt-1">Square Feet</p>
+
+                                                <div class="flex flex-row">
+                                                    <select name="minSqft" id="minSqft"
+                                                        class="w-20 rounded-md shadow border-2 bg-indigo-50 border-teal-500 focus:border-teal-500 text-teal-600 font-semibold text-left">
+                                                        <option value="anyMinSqft">Any</option>
+                                                        <option value="min500sqft">500</option>
+                                                        <option value="min750sqft">750</option>
+                                                        <option value="min1000sqft">1,000</option>
+                                                        <option value="min1250sqft">1,250</option>
+                                                        <option value="min1500sqft">1,500</option>
+                                                        <option value="min1750sqft">1,750</option>
+                                                        <option value="min2000sqft">2,000</option>
+                                                        <option value="min2500sqft">2,500</option>
+                                                        <option value="min2750sqft">2,750</option>
+                                                        <option value="min3000sqft">3,000</option>
+                                                        <option value="min3500sqft">3,500</option>
+                                                        <option value="min4000sqft">4,000</option>
+                                                        <option value="min4000sqft">4,000</option>
+                                                        <option value="min5000sqft">5,000</option>
+                                                        <option value="min7500sqft">7,500</option>
+                                                    </select>
+
+                                                    <span class="text-lg px-1 scale-x-150">-</span>
+                                                    <select name="maxSqft" id="maxSqft"
+                                                        class="w-20 rounded-md shadow border-2 bg-indigo-50 border-teal-500 focus:border-teal-500 text-teal-600 font-semibold text-left">
+                                                        <option value="maxanyMinSqft">Any</option>
+                                                        <option value="max500sqft">500</option>
+                                                        <option value="max750sqft">750</option>
+                                                        <option value="max1000sqft">1,000</option>
+                                                        <option value="max1250sqft">1,250</option>
+                                                        <option value="max1500sqft">1,500</option>
+                                                        <option value="max1750sqft">1,750</option>
+                                                        <option value="max2000sqft">2,000</option>
+                                                        <option value="max2500sqft">2,500</option>
+                                                        <option value="max2750sqft">2,750</option>
+                                                        <option value="max3000sqft">3,000</option>
+                                                        <option value="max3500sqft">3,500</option>
+                                                        <option value="max4000sqft">4,000</option>
+                                                        <option value="max4000sqft">4,000</option>
+                                                        <option value="max5000sqft">5,000</option>
+                                                        <option value="max7500sqft">7,500</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <!-- Must accept only numbers -->
+                                            <div class="flex flex-row mt-3">
+                                                <p class="w-full mt-1">Year Built</p>
+
+                                                <div class="flex flex-row">
+                                                    <input
+                                                        class="shadow rounded-md w-20 text-base focus bg-indigo-50 border-2 border-teal-500 placeholder-teal-600 placeholder:font-semibold focus:ring-teal-500"
+                                                        placeholder="Min">
+                                                    <span class="text-lg px-1 scale-x-150">-</span>
+                                                    <input
+                                                        class="shadow rounded-md w-20 text-base bg-indigo-50 border-2 border-teal-500 placeholder-teal-600 placeholder:font-semibold focus:ring-teal-500"
+                                                        placeholder="Max">
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                        <li class="flex justify-end mt-4">
+                                            <button
+                                                class=" disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed hidden md:inline-flex items-center text-center p-2 border-transparent tracking-wide text-sm rounded-md shadow-sm text-white font-semibold bg-teal-600 border-teal-600 border-2 hover:bg-teal-500 hover:border-teal-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 focus:bg-teal-500 focus:border-teal-500">Apply
+                                            </button>
+                                        </li>
+
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
 
