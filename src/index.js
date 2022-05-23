@@ -306,3 +306,43 @@ const homeStyleDropdown = document.getElementById("homeStyleDropdown");
 homeStyleBtn.addEventListener("click", function () {
     homeStyleDropdown.classList.toggle("hidden");
 })
+
+// Home style select/deselect
+let selectAllbtn = document.getElementById("selectAllbtn");
+let selectAll = document.getElementById("selectAll");
+
+const select = () => {
+    let choices = document.querySelectorAll(".home-choices");
+    for (let i = 0; i < choices.length; i++) {
+        choices[i].checked = true;
+    }
+}
+
+const deselect = () => {
+    let choices = document.querySelectorAll(".home-choices");
+    for (let i = 0; i < choices.length; i++) {
+        choices[i].checked = false;
+    }
+}
+
+selectAllbtn.addEventListener("click", function () {
+
+    switch (selectAllbtn.checked) {
+        case (true):
+            select();
+            selectAll.innerHTML = "Deselect All";
+            break;
+        case (false):
+            deselect();
+            selectAll.innerHTML = "Select All";
+    }
+})
+
+const moreBtn = document.getElementById("moreBtn");
+const moreDropdown = document.getElementById("moreDropdown");
+
+moreBtn.addEventListener("click", function () {
+    moreDropdown.classList.toggle("hidden");
+})
+
+
