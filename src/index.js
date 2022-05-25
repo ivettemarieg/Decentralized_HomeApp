@@ -1,4 +1,6 @@
+// Temporary imports for testing
 import nftData from '../meta.json' assert {type: 'json'};
+import geojson from '../chicago-parks.geojson' assert {type: 'json'};
 
 class Navbar extends HTMLElement {
     connectedCallback() {
@@ -13,7 +15,7 @@ class Navbar extends HTMLElement {
             <link href="/dist/output.css" rel="stylesheet">
         </head>
         <body>
-            <nav class="bg-gray-800">
+            <nav class="bg-teal-800">
                 <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
                     <div class="relative flex items-center justify-between h-16">
                         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -35,12 +37,13 @@ class Navbar extends HTMLElement {
                             </button>
                         </div>
                         <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                            <div class="flex-shrink-0 flex items-center">
-                                <img class="block lg:hidden h-8 w-auto"
-                                    src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow">
-                                <img class="hidden lg:block h-8 w-auto"
-                                    src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
-                                    alt="Workflow">
+                            <div class="flex-shrink-0 flex items-center text-black">
+                                <div class="block lg:hidden">
+                                    <a href=""><i class="fa-solid fa-dragon text-rose-500 fa-2xl"></i></a>
+                                </div>                                
+                                <div class="hidden lg:block">
+                                    <a href=""><i class="fa-solid fa-dragon text-rose-500 fa-2xl"></i></a>
+                                </div>
                             </div>
                             <div class="hidden sm:block sm:ml-6">
                                 <div class="flex space-x-4">
@@ -342,7 +345,33 @@ const moreBtn = document.getElementById("moreBtn");
 const moreDropdown = document.getElementById("moreDropdown");
 
 moreBtn.addEventListener("click", function () {
-    moreDropdown.classList.toggle("hidden");
+    if (window.innerWidth > 767) {
+        moreDropdown.classList.toggle("hidden");
+    }
 })
 
+var windowWidth = document.querySelector(window).width();
+document.querySelector(window).onresize(function () {
+    if (windowWidth < 768)
+        moreDropdown.classList.add('hidden');
+});
 
+
+// adds new markers to map
+
+for (const feature of geojson.features) {
+    // create a HTML element for each feature
+    const el = document.createElement('div');
+    el.className = 'marker';
+
+    // make a marker for each feature, add popups, and add to the map
+    new mapboxgl.Marker(el)
+        .setLngLat(feature.geometry.coordinates)
+        .setPopup(
+            new mapboxgl.Popup({ offset: 25 })
+                .setHTML(
+                    `<h3>${feature.properties.title}</h3><p>${feature.properties.description}</p>`
+                )
+        )
+        .addTo(map);
+}
