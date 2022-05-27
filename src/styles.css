@@ -39,3 +39,13 @@
     text-align: center;
     font-family: 'Open Sans', sans-serif;
 }
+
+@media only screen and (max-width: 767px) {
+
+    #moreDropdown,
+    #bb_dropdown,
+    #price_dropdown,
+    #homeStyleDropdown {
+        display: none;
+    }
+}
