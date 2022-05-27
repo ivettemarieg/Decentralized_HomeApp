@@ -1,6 +1,6 @@
 // Temporary imports for testing
 import nftData from '../meta.json' assert {type: 'json'};
-import geojson from '../chicago-parks.geojson' assert {type: 'json'};
+// import geojson from '../chicago-parks.geojson' assert {type: 'json'};
 
 class Navbar extends HTMLElement {
     connectedCallback() {
@@ -39,10 +39,10 @@ class Navbar extends HTMLElement {
                         <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                             <div class="flex-shrink-0 flex items-center text-black">
                                 <div class="block lg:hidden">
-                                    <a href=""><i class="fa-solid fa-dragon text-rose-500 fa-2xl"></i></a>
+                                    <a href=""><i class="fa-solid fa-dragon text-black fa-2xl"></i></a>
                                 </div>                                
                                 <div class="hidden lg:block">
-                                    <a href=""><i class="fa-solid fa-dragon text-rose-500 fa-2xl"></i></a>
+                                    <a href=""><i class="fa-solid fa-dragon text-black fa-2xl"></i></a>
                                 </div>
                             </div>
                             <div class="hidden sm:block sm:ml-6">
@@ -237,19 +237,19 @@ class Card extends HTMLElement {
                 <div class="flex-1">
                     <div class="rounded-lg shadow-lg bg-white max-w-sm transition ease-in-out delay-150 hover:scale-110">
                         <a href="#!">
-                            <img class="rounded-t-lg" src="https://mdbootstrap.com/img/new/standard/nature/184.jpg" alt="" />
+                            <div class="h-52 w-auto"><img class="rounded-t-lg h-full w-full object-cover" src="${nftData[i].properties.img}" alt="nft" /></div>
                         </a>
                         <div class="p-6">
-                            <h5 class="text-gray-900 text-xl font-bold mb-2" id="nft-name">${nftData[i].name}</h5>
+                            <h5 class="text-gray-900 text-xl font-bold mb-2" id="nft-name">${nftData[i].properties.title}</h5>
                             <p class="text-purple-600 text-base font-medium" id="nft-description">
-                                ${nftData[i].description}
+                                ${nftData[i].properties.description}
                             </p>
                             <p class="text-gray-700 text-base mb-2" id="nft-real-address">
-                                ${nftData[i].home_address}
+                                ${nftData[i].properties.home_address}
                             </p>
 
                             <div class="flex flex-row justify-start">
-                                <div class="mr-1"><span class="text-3xl font-bold" id="price">${nftData[i].price}</span></div>
+                                <div class="mr-1"><span class="text-3xl font-bold" id="price">${nftData[i].properties.price}</span></div>
                                 <div class="flex items-center"><i class="fa-brands fa-ethereum fa-xl"></i></div>
                             </div>
 
@@ -269,6 +269,7 @@ class Card extends HTMLElement {
     }
 }
 
+console.log(nftData[0]);
 window.customElements.define("nft-card", Card);
 
 // To create multiple cards as long as there is more JSON data.
@@ -289,11 +290,15 @@ const map = new mapboxgl.Map({
 
 // Dropdown Filters
 
+
 const bbButton = document.getElementById("bbButton")
 const bbdropdown = document.getElementById("bb_dropdown");
 
 bbButton.addEventListener("click", function () {
     bbdropdown.classList.toggle("hidden");
+    priceDropdown.classList.add("hidden");
+    homeStyleDropdown.classList.add("hidden");
+    moreDropdown.classList.add("hidden");
 })
 
 const priceBtn = document.getElementById("priceBtn");
@@ -301,6 +306,10 @@ const priceDropdown = document.getElementById("price_dropdown");
 
 priceBtn.addEventListener("click", function () {
     priceDropdown.classList.toggle("hidden");
+    bbdropdown.classList.add("hidden");
+    homeStyleDropdown.classList.add("hidden");
+    moreDropdown.classList.add("hidden");
+
 })
 
 const homeStyleBtn = document.getElementById("homeStyleBtn");
@@ -308,6 +317,10 @@ const homeStyleDropdown = document.getElementById("homeStyleDropdown");
 
 homeStyleBtn.addEventListener("click", function () {
     homeStyleDropdown.classList.toggle("hidden");
+    priceDropdown.classList.add("hidden");
+    bbdropdown.classList.add("hidden");
+    moreDropdown.classList.add("hidden");
+
 })
 
 // Home style select/deselect
@@ -347,18 +360,13 @@ const moreDropdown = document.getElementById("moreDropdown");
 moreBtn.addEventListener("click", function () {
     if (window.innerWidth > 767) {
         moreDropdown.classList.toggle("hidden");
+        priceDropdown.classList.add("hidden");
+        homeStyleDropdown.classList.add("hidden");
+        bbdropdown.classList.add("hidden");
     }
 })
 
-var windowWidth = document.querySelector(window).width();
-document.querySelector(window).onresize(function () {
-    if (windowWidth < 768)
-        moreDropdown.classList.add('hidden');
-});
-
-
 // adds new markers to map
-
 for (const feature of geojson.features) {
     // create a HTML element for each feature
     const el = document.createElement('div');
