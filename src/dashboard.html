@@ -10,7 +10,8 @@
     <title>Dashboard</title>
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.5/dist/flowbite.min.css" />
     <link href="/dist/output.css" rel="stylesheet">
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.css" rel="stylesheet">
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css' rel='stylesheet' />
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -22,8 +23,12 @@
             <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
                 <div class="bg-white">
                     <div class="max-w-2xl mx-auto pb-10 pt-8 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-                        <h1 class="text-3xl font-bold text-gray-900">Dashboard</h1>
+                        <h1 id="dashboard" class="text-5xl font-bold text-black font-serif tracking-wide">Dashboard
+                        </h1>
 
+                        <!-- <div class="mt-2 flex-grow border-2 border-teal-400 bg-teal-400"></div> -->
+
+                        <div id="map" class="rounded-md mt-5"></div>
 
                         <div class="flex flex-row justify-start mt-3">
                             <!-- Search Bar -->
@@ -404,8 +409,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div id="map" class="rounded-md mt-7"></div>
 
                         <!-- Card List -->
                         <div class="flex">
