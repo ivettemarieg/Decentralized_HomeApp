@@ -1,0 +1,90 @@
+{
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "title": "House by the Lake",
+                "description": "4 bds 2 ba 1,496 sqft",
+                "home_address": "5678 FakeAddress Dr., Whoville, PA 12345",
+                "price": "20",
+                "img": "https://www.rocketmortgage.com/resources-cmsassets/RocketMortgage.com/Article_Images/Large_Images/TypesOfHomes/types-of-homes-hero.jpg"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -87.637596,
+                    41.940403
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "title": "TreeHouse",
+                "description": "10 bds 7 ba 10,002 sqft",
+                "home_address": "1234 FakeAddress Dr., Whoville, PA 12345",
+                "price": "100",
+                "img": "https://ca-times.brightspotcdn.com/dims4/default/c9a627c/2147483647/strip/true/crop/2000x1195+0+0/resize/840x502!/quality/90/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2Fad%2Ff4%2F1f1b2193479eafb7cbba65691184%2F10480-sunset-fullres-01.jpg"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -87.603735,
+                    41.829985
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "title": "Desert Mansion",
+                "description": "10 bds 7 ba 10,002 sqft",
+                "home_address": "500 FakeAddress Dr., Whoville, PA 12345",
+                "price": "500",
+                "img": "https://boomtown-production-consumer-backup.s3.amazonaws.com/298/files/2020/01/house-view-1.png"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -87.622554,
+                    41.882534
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "title": "Haunted House",
+                "description": "7 bds 5 ba 10,002 sqft",
+                "home_address": "4080 FakeAddress Dr., Whoville, PA 12345",
+                "price": "50",
+                "img": "https://media.foxbusiness.com/BrightCove/854081161001/202008/3787/854081161001_6178875221001_6178880081001-vs.jpg"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -87.603735,
+                    41.829985
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "title": "Elite House",
+                "description": "9 bds 7 ba 10,002 sqft",
+                "home_address": "3260 FakeAddress Dr., Whoville, PA 12345",
+                "price": "100",
+                "img": "https://ap.rdcpix.com/af32340e45f38444a488c867e26e751fl-m3415054537od-w480_h360_x2.jpg"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -87.619185,
+                    41.876367
+                ]
+            }
+        }
+    ],
+    "type": "FeatureCollection"
+}
