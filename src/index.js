@@ -1,6 +1,5 @@
 // Temporary imports for testing
-import nftData from '../meta.json' assert {type: 'json'};
-// import geojson from '../chicago-parks.geojson' assert {type: 'json'};
+import nftData from '../meta.geojson' assert {type: 'json'}
 
 class Navbar extends HTMLElement {
     connectedCallback() {
@@ -15,7 +14,7 @@ class Navbar extends HTMLElement {
             <link href="/dist/output.css" rel="stylesheet">
         </head>
         <body>
-            <nav class="bg-teal-800">
+            <nav class="bg-teal-600 shadow-md">
                 <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
                     <div class="relative flex items-center justify-between h-16">
                         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -39,16 +38,16 @@ class Navbar extends HTMLElement {
                         <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                             <div class="flex-shrink-0 flex items-center text-black">
                                 <div class="block lg:hidden">
-                                    <a href=""><i class="fa-solid fa-dragon text-black fa-2xl"></i></a>
+                                    <a href=""><i class="fa-solid fa-dragon text-white fa-2xl"></i> Blillow</a>
                                 </div>                                
                                 <div class="hidden lg:block">
-                                    <a href=""><i class="fa-solid fa-dragon text-black fa-2xl"></i></a>
+                                    <a href=""><i class="fa-solid fa-dragon text-white fa-2xl"></i></a>
                                 </div>
                             </div>
                             <div class="hidden sm:block sm:ml-6">
                                 <div class="flex space-x-4">
                                     <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                                    <a href="#" class="active text-white px-3 py-2 rounded-md text-sm font-medium home-links"
+                                    <a href="#" class="activeLink text-white px-3 py-2 rounded-md text-sm font-medium home-links"
                                         aria-current="page">Dashboard</a>
 
                                     <a href="#" class="notactive text-white px-3 py-2 rounded-md text-sm font-medium home-links">Team</a>
@@ -63,7 +62,7 @@ class Navbar extends HTMLElement {
                         </div>
                         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                             <button type="button"
-                                class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                                class="bg-gray-800 p-1 rounded-full text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                                 <span class="sr-only">View notifications</span>
                                 <!-- Heroicon name: outline/bell -->
                                 <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -209,15 +208,17 @@ const navLinks = document.querySelectorAll('.home-links');
 for (const link of navLinks) {
     link.addEventListener("click", function () {
         navLinks.forEach(links => {
-            links.classList.remove('active');
+            links.classList.remove('activeLink');
             links.classList.add('notactive');
         })
 
-        this.classList.add('active');
+        this.classList.add('activeLink');
     })
 }
 
 // NFT card list
+const nftCard = nftData['features'];
+
 class Card extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
@@ -236,20 +237,20 @@ class Card extends HTMLElement {
             <div class="flex-1 basis-1 justify-center mt-8 overflow-inherit">
                 <div class="flex-1">
                     <div class="rounded-lg shadow-lg bg-white max-w-sm transition ease-in-out delay-150 hover:scale-110">
-                        <a href="#!">
-                            <div class="h-52 w-auto"><img class="rounded-t-lg h-full w-full object-cover" src="${nftData[i].properties.img}" alt="nft" /></div>
+                        <a href="#!" class="nft-info">
+                            <div class="h-52 w-auto"><img class="nft-img-info rounded-t-lg h-full w-full object-cover" src="${nftCard[i].properties.img}" alt="nft" /></div>
                         </a>
                         <div class="p-6">
-                            <h5 class="text-gray-900 text-xl font-bold mb-2" id="nft-name">${nftData[i].properties.title}</h5>
+                            <h5 class="text-gray-900 text-xl font-bold mb-2" id="nft-name">${nftCard[i].properties.title}</h5>
                             <p class="text-purple-600 text-base font-medium" id="nft-description">
-                                ${nftData[i].properties.description}
+                                ${nftCard[i].properties.description}
                             </p>
                             <p class="text-gray-700 text-base mb-2" id="nft-real-address">
-                                ${nftData[i].properties.home_address}
+                                ${nftCard[i].properties.home_address}
                             </p>
 
                             <div class="flex flex-row justify-start">
-                                <div class="mr-1"><span class="text-3xl font-bold" id="price">${nftData[i].properties.price}</span></div>
+                                <div class="mr-1"><span class="text-3xl font-bold" id="price">${nftCard[i].properties.price}</span></div>
                                 <div class="flex items-center"><i class="fa-brands fa-ethereum fa-xl"></i></div>
                             </div>
 
@@ -269,17 +270,16 @@ class Card extends HTMLElement {
     }
 }
 
-console.log(nftData[0]);
 window.customElements.define("nft-card", Card);
 
 // To create multiple cards as long as there is more JSON data.
-for (var i in nftData) {
+for (var i in nftCard) {
     const newCard = document.createElement("nft-card");
     const nftList = document.getElementById("nft-list");
     nftList.appendChild(newCard);
 }
 
-// Map
+// Renders Map
 mapboxgl.accessToken = '<Your_Key>';
 const map = new mapboxgl.Map({
     container: 'map',
@@ -288,9 +288,75 @@ const map = new mapboxgl.Map({
     zoom: 3
 });
 
+// Create Markers
+// Temporary Token ID 
+let tokenID = 0;
+nftCard.forEach(data => {
+    data.properties.id = tokenID;
+    tokenID++;
+})
+
+// Generate points on map
+map.on('load', () => {
+    /* Add the data to your map as a layer */
+    map.addLayer({
+        id: 'locations',
+        type: 'circle',
+        /* Add a GeoJSON source containing place coordinates and information. */
+        source: {
+            type: 'geojson',
+            data: nftData
+        }
+    });
+});
+
+function flyToLocation(nft) {
+    map.flyTo({
+        center: nft.geometry.coordinates,
+        zoom: 15
+    });
+}
+
+
+function createPopUp(nftCard) {
+    const popUps = document.getElementsByClassName('mapboxgl-popup mapboxgl-popup-anchor-bottom');
+
+    // This is not detecting popUps
+    if (popUps[0]) {
+        popUps[0].remove();
+    }
+
+    const popup = new mapboxgl.Popup()
+        .setLngLat(nftCard.geometry.coordinates)
+        .setHTML(`<h3>Sweetgreen</h3><h4>${nftCard.properties.description}</h4>`)
+        .addTo(map);
+
+
+}
+
+const nftMapInfo = document.getElementsByClassName('nft-info');
+const nftMapImgInfo = document.getElementsByClassName('nft-img-info');
+
+for (let i = 0; i < nftMapInfo.length; i++) {
+    nftMapInfo[i].addEventListener("click", function () {
+
+        window.scroll({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        });
+
+        nftCard.forEach(data => {
+            if (data.properties.img === nftMapImgInfo[i].getAttribute('src')) {
+                flyToLocation(data);
+                createPopUp(data);
+            }
+        });
+
+    })
+}
+
 // Dropdown Filters
-
-
 const bbButton = document.getElementById("bbButton")
 const bbdropdown = document.getElementById("bb_dropdown");
 
@@ -365,21 +431,3 @@ moreBtn.addEventListener("click", function () {
         bbdropdown.classList.add("hidden");
     }
 })
-
-// adds new markers to map
-for (const feature of geojson.features) {
-    // create a HTML element for each feature
-    const el = document.createElement('div');
-    el.className = 'marker';
-
-    // make a marker for each feature, add popups, and add to the map
-    new mapboxgl.Marker(el)
-        .setLngLat(feature.geometry.coordinates)
-        .setPopup(
-            new mapboxgl.Popup({ offset: 25 })
-                .setHTML(
-                    `<h3>${feature.properties.title}</h3><p>${feature.properties.description}</p>`
-                )
-        )
-        .addTo(map);
-}
