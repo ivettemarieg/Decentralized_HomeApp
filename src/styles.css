@@ -1,8 +1,8 @@
-.active {
+.activeLink {
     background-color: #2dd4bf;
 }
 
-.active:hover {
+.activeLink:hover {
     color: #d1d5db;
 }
 
@@ -22,6 +22,11 @@
     padding: 0;
 }
 
+.activeItem {
+    color: #8cc63f;
+    background-color: #f8f8f8;
+}
+
 .marker {
     background-image: url('/img/mapbox-icon.png');
     background-size: cover;
@@ -32,12 +37,45 @@
 }
 
 .mapboxgl-popup {
-    max-width: 200px;
+    padding-bottom: 50px;
+}
+
+.mapboxgl-popup-close-button {
+    display: none;
 }
 
 .mapboxgl-popup-content {
-    text-align: center;
-    font-family: 'Open Sans', sans-serif;
+    font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', sans-serif;
+    padding: 0;
+    width: 180px;
+}
+
+.mapboxgl-popup-content h3 {
+    background: #91c949;
+    color: #fff;
+    margin: 0;
+    padding: 10px;
+    border-radius: 3px 3px 0 0;
+    font-weight: 700;
+    margin-top: -15px;
+}
+
+.mapboxgl-popup-content h4 {
+    margin: 0;
+    padding: 10px;
+    font-weight: 400;
+}
+
+.mapboxgl-popup-content div {
+    padding: 10px;
+}
+
+.mapboxgl-popup-anchor-top>.mapboxgl-popup-content {
+    margin-top: 15px;
+}
+
+.mapboxgl-popup-anchor-top>.mapboxgl-popup-tip {
+    border-bottom-color: #91c949;
 }
 
 @media only screen and (max-width: 767px) {
