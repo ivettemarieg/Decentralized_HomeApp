@@ -1,5 +1,5 @@
 // Temporary imports for testing
-import nftData from '../meta.geojson' assert {type: 'json'}
+import nftData from '../meta.geojson' assert {type: 'json'};
 
 class Navbar extends HTMLElement {
     connectedCallback() {
@@ -47,7 +47,7 @@ class Navbar extends HTMLElement {
                             <div class="hidden sm:block sm:ml-6">
                                 <div class="flex space-x-4">
                                     <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                                    <a href="#" class="activeLink text-white px-3 py-2 rounded-md text-sm font-medium home-links"
+                                    <a href="/src/dashboard.html" class="activeLink text-white px-3 py-2 rounded-md text-sm font-medium home-links"
                                         aria-current="page">Dashboard</a>
 
                                     <a href="#" class="notactive text-white px-3 py-2 rounded-md text-sm font-medium home-links">Team</a>
@@ -55,8 +55,8 @@ class Navbar extends HTMLElement {
                                     <a href="#"
                                         class="notactive px-3 py-2 text-white rounded-md text-sm font-medium home-links">Projects</a>
 
-                                    <a href="#"
-                                        class="notactive px-3 py-2 text-white rounded-md text-sm font-medium home-links">Calendar</a>
+                                    <a href="/src/createNFT.html"
+                                        class="notactive px-3 py-2 text-white rounded-md text-sm font-medium home-links">Sell NFT</a>
                                 </div>
                             </div>
                         </div>
@@ -141,7 +141,7 @@ class Footer extends HTMLElement {
         
         <body class="bg-gray-200">
             <footer class="bottom-0 left-0 right-0 ">
-                <div class="p-3 bg-gray-800 text-gray-200">
+                <div class="p-3 bg-teal-600 text-gray-200">
                     <div class="max-w-7xl mx-auto">
                         <div class="hidden sm:block" aria-hidden="true">
                             <div class="py-5">
@@ -184,7 +184,6 @@ class Footer extends HTMLElement {
     }
 }
 
-
 window.customElements.define('app-navbar', Navbar);
 window.customElements.define('app-footer', Footer);
 
@@ -216,218 +215,507 @@ for (const link of navLinks) {
     })
 }
 
-// NFT card list
-const nftCard = nftData['features'];
+if (document.body.classList.contains('dashboard')) {
+    // NFT card list
+    const nftCard = nftData['features'];
 
-class Card extends HTMLElement {
-    connectedCallback() {
-        this.innerHTML = `
-        <!doctype html>
-        <html>
+    class Card extends HTMLElement {
+        connectedCallback() {
+            this.innerHTML = `
+            <!doctype html>
+            <html>
 
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link rel="stylesheet" href="style.css">
-            <script src="https://kit.fontawesome.com/b454cb32e4.js" crossorigin="anonymous"></script>
-            <script src="https://cdn.tailwindcss.com"></script>
-            <link href="/dist/output.css" rel="stylesheet">
-        </head>
-        <body>
-            <div class="flex-1 basis-1 justify-center mt-8 overflow-inherit">
-                <div class="flex-1">
-                    <div class="rounded-lg shadow-lg bg-white max-w-sm transition ease-in-out delay-150 hover:scale-110">
-                        <a href="#!" class="nft-info">
-                            <div class="h-52 w-auto"><img class="nft-img-info rounded-t-lg h-full w-full object-cover" src="${nftCard[i].properties.img}" alt="nft" /></div>
-                        </a>
-                        <div class="p-6">
-                            <h5 class="text-gray-900 text-xl font-bold mb-2" id="nft-name">${nftCard[i].properties.title}</h5>
-                            <p class="text-purple-600 text-base font-medium" id="nft-description">
-                                ${nftCard[i].properties.description}
-                            </p>
-                            <p class="text-gray-700 text-base mb-2" id="nft-real-address">
-                                ${nftCard[i].properties.home_address}
-                            </p>
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link rel="stylesheet" href="style.css">
+                <script src="https://kit.fontawesome.com/b454cb32e4.js" crossorigin="anonymous"></script>
+                <script src="https://cdn.tailwindcss.com"></script>
+                <link href="/dist/output.css" rel="stylesheet">
+            </head>
+            <body>
+                <div class="flex-1 basis-1 justify-center mt-8 overflow-inherit">
+                    <div class="flex-1">
+                        <div class="rounded-lg shadow-lg bg-white max-w-sm transition ease-in-out delay-150 hover:scale-110">
+                            <a href="#!" class="nft-info">
+                                <div class="h-52 w-auto"><img class="nft-img-info rounded-t-lg h-full w-full object-cover" src="${nftCard[i].properties.img}" alt="nft" /></div>
+                            </a>
+                            <div class="p-6">
+                                <h5 class="text-gray-900 text-xl font-bold mb-2" id="nft-name">${nftCard[i].properties.title}</h5>
+                                <p class="text-purple-600 text-base font-medium" id="nft-description">
+                                    ${nftCard[i].properties.description}
+                                </p>
+                                <p class="text-gray-700 text-base mb-2" id="nft-real-address">
+                                    ${nftCard[i].properties.home_address}
+                                </p>
 
-                            <div class="flex flex-row justify-start">
-                                <div class="mr-1"><span class="text-3xl font-bold" id="price">${nftCard[i].properties.price}</span></div>
-                                <div class="flex items-center"><i class="fa-brands fa-ethereum fa-xl"></i></div>
-                            </div>
+                                <div class="flex flex-row justify-start">
+                                    <div class="mr-1"><span class="text-3xl font-bold" id="price">${nftCard[i].properties.price}</span></div>
+                                    <div class="flex items-center"><i class="fa-brands fa-ethereum fa-xl"></i></div>
+                                </div>
 
-                            <div class="flex flex-row justify-start mt-2">
-                                <button
-                                    class="disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed mr-2 inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Move</button>
-                                <button
-                                    class="px-6 py-2.5 bg-purple-600 text-white text-base font-medium leading-tight rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Sell</button>
+                                <div class="flex flex-row justify-start mt-2">
+                                    <button
+                                        class="disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none disabled:cursor-not-allowed mr-2 inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Move</button>
+                                    <button
+                                        class="px-6 py-2.5 bg-purple-600 text-white text-base font-medium leading-tight rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Sell</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </body>
-        </html>
-`
-    }
-}
-
-window.customElements.define("nft-card", Card);
-
-// To create multiple cards as long as there is more JSON data.
-for (var i in nftCard) {
-    const newCard = document.createElement("nft-card");
-    const nftList = document.getElementById("nft-list");
-    nftList.appendChild(newCard);
-}
-
-// Renders Map
-mapboxgl.accessToken = '<Your_Key>';
-const map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/mapbox/satellite-streets-v11',
-    center: [-74.5, 40],
-    zoom: 3
-});
-
-// Create Markers
-// Temporary Token ID 
-let tokenID = 0;
-nftCard.forEach(data => {
-    data.properties.id = tokenID;
-    tokenID++;
-})
-
-// Generate points on map
-map.on('load', () => {
-    /* Add the data to your map as a layer */
-    map.addLayer({
-        id: 'locations',
-        type: 'circle',
-        /* Add a GeoJSON source containing place coordinates and information. */
-        source: {
-            type: 'geojson',
-            data: nftData
+            </body>
+            </html>
+    `
         }
-    });
-});
-
-function flyToLocation(nft) {
-    map.flyTo({
-        center: nft.geometry.coordinates,
-        zoom: 15
-    });
-}
-
-
-function createPopUp(nftCard) {
-    const popUps = document.getElementsByClassName('mapboxgl-popup mapboxgl-popup-anchor-bottom');
-
-    // This is not detecting popUps
-    if (popUps[0]) {
-        popUps[0].remove();
     }
 
-    const popup = new mapboxgl.Popup()
-        .setLngLat(nftCard.geometry.coordinates)
-        .setHTML(`<h3>Sweetgreen</h3><h4>${nftCard.properties.description}</h4>`)
-        .addTo(map);
+    window.customElements.define("nft-card", Card);
 
+    // To create multiple available nft cards as long as there is more JSON data.
+    for (var i in nftCard) {
+        const newCard = document.createElement("nft-card");
+        const nftList = document.getElementById("nft-available-list");
+        nftList.appendChild(newCard);
+    }
 
-}
+    // Create nft bidding cards
+    for (var i in nftCard) {
+        const newCard = document.createElement("nft-card");
+        const nftList = document.getElementById("nft-bidding-list");
+        nftList.appendChild(newCard);
+    }
 
-const nftMapInfo = document.getElementsByClassName('nft-info');
-const nftMapImgInfo = document.getElementsByClassName('nft-img-info');
+    // Renders Map
+    mapboxgl.accessToken = '<Your_Key>';
+    const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/satellite-streets-v11',
+        center: [-74.5, 40],
+        zoom: 3
+    });
 
-for (let i = 0; i < nftMapInfo.length; i++) {
-    nftMapInfo[i].addEventListener("click", function () {
+    // Create Markers
+    // Temporary Token ID 
+    let tokenID = 0;
+    nftCard.forEach(data => {
+        data.properties.id = tokenID;
+        tokenID++;
+    })
 
-        window.scroll({
-            top: 0,
-            left: 0,
-            behavior: 'smooth'
-        });
-
-        nftCard.forEach(data => {
-            if (data.properties.img === nftMapImgInfo[i].getAttribute('src')) {
-                flyToLocation(data);
-                createPopUp(data);
+    // Generate points on map
+    map.on('load', () => {
+        /* Add the data to your map as a layer */
+        map.addLayer({
+            id: 'locations',
+            type: 'circle',
+            /* Add a GeoJSON source containing place coordinates and information. */
+            source: {
+                type: 'geojson',
+                data: nftData
             }
         });
+    });
 
+    function flyToLocation(nft) {
+        map.flyTo({
+            center: nft.geometry.coordinates,
+            zoom: 15
+        });
+    }
+
+
+    function createPopUp(nftCard) {
+        const popUps = document.getElementsByClassName('mapboxgl-popup mapboxgl-popup-anchor-bottom');
+
+        // This is not detecting popUps
+        if (popUps[0]) {
+            popUps[0].remove();
+        }
+
+        const popup = new mapboxgl.Popup()
+            .setLngLat(nftCard.geometry.coordinates)
+            .setHTML(`<h3>Sweetgreen</h3><h4>${nftCard.properties.description}</h4>`)
+            .addTo(map);
+
+
+    }
+
+    const nftMapInfo = document.getElementsByClassName('nft-info');
+    const nftMapImgInfo = document.getElementsByClassName('nft-img-info');
+
+    for (let i = 0; i < nftMapInfo.length; i++) {
+        nftMapInfo[i].addEventListener("click", function () {
+
+            window.scroll({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            });
+
+            nftCard.forEach(data => {
+                if (data.properties.img === nftMapImgInfo[i].getAttribute('src')) {
+                    flyToLocation(data);
+                    createPopUp(data);
+                }
+            });
+
+        })
+    }
+
+    // Dropdown Filters
+    const bbButton = document.getElementById("bbButton")
+    const bbdropdown = document.getElementById("bb_dropdown");
+
+    bbButton.addEventListener("click", function () {
+        bbdropdown.classList.toggle("hidden");
+        priceDropdown.classList.add("hidden");
+        homeStyleDropdown.classList.add("hidden");
+        moreDropdown.classList.add("hidden");
+    })
+
+    const priceBtn = document.getElementById("priceBtn");
+    const priceDropdown = document.getElementById("price_dropdown");
+
+    priceBtn.addEventListener("click", function () {
+        priceDropdown.classList.toggle("hidden");
+        bbdropdown.classList.add("hidden");
+        homeStyleDropdown.classList.add("hidden");
+        moreDropdown.classList.add("hidden");
+
+    })
+
+    const homeStyleBtn = document.getElementById("homeStyleBtn");
+    const homeStyleDropdown = document.getElementById("homeStyleDropdown");
+
+    homeStyleBtn.addEventListener("click", function () {
+        homeStyleDropdown.classList.toggle("hidden");
+        priceDropdown.classList.add("hidden");
+        bbdropdown.classList.add("hidden");
+        moreDropdown.classList.add("hidden");
+
+    })
+
+    // Home style select/deselect
+    let selectAllbtn = document.getElementById("selectAllbtn");
+    let selectAll = document.getElementById("selectAll");
+
+    const select = () => {
+        let choices = document.querySelectorAll(".home-choices");
+        for (let i = 0; i < choices.length; i++) {
+            choices[i].checked = true;
+        }
+    }
+
+    const deselect = () => {
+        let choices = document.querySelectorAll(".home-choices");
+        for (let i = 0; i < choices.length; i++) {
+            choices[i].checked = false;
+        }
+    }
+
+    selectAllbtn.addEventListener("click", function () {
+
+        switch (selectAllbtn.checked) {
+            case (true):
+                select();
+                selectAll.innerHTML = "Deselect All";
+                break;
+            case (false):
+                deselect();
+                selectAll.innerHTML = "Select All";
+        }
+    })
+
+    const moreBtn = document.getElementById("moreBtn");
+    const moreDropdown = document.getElementById("moreDropdown");
+
+    moreBtn.addEventListener("click", function () {
+        if (window.innerWidth > 767) {
+            moreDropdown.classList.toggle("hidden");
+            priceDropdown.classList.add("hidden");
+            homeStyleDropdown.classList.add("hidden");
+            bbdropdown.classList.add("hidden");
+        }
     })
 }
 
-// Dropdown Filters
-const bbButton = document.getElementById("bbButton")
-const bbdropdown = document.getElementById("bb_dropdown");
+if (document.body.classList.contains("createNFT")) {
 
-bbButton.addEventListener("click", function () {
-    bbdropdown.classList.toggle("hidden");
-    priceDropdown.classList.add("hidden");
-    homeStyleDropdown.classList.add("hidden");
-    moreDropdown.classList.add("hidden");
-})
+    mapboxgl.accessToken = 'pk.eyJ1IjoiaXZldHRlbWFyaWU5NyIsImEiOiJjbDNjMHB4ODYwM204M2RwYXF2bHh2c3JxIn0.qk5Frp812nC_HH1thoOQJA';
+    const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/satellite-streets-v11',
+        center: [-74.5, 40],
+        zoom: 3
+    });
 
-const priceBtn = document.getElementById("priceBtn");
-const priceDropdown = document.getElementById("price_dropdown");
+    const countryList = [
+        "Afghanistan",
+        "Albania",
+        "Algeria",
+        "American Samoa",
+        "Andorra",
+        "Angola",
+        "Anguilla",
+        "Antarctica",
+        "Antigua and Barbuda",
+        "Argentina",
+        "Armenia",
+        "Aruba",
+        "Australia",
+        "Austria",
+        "Azerbaijan",
+        "Bahamas (the)",
+        "Bahrain",
+        "Bangladesh",
+        "Barbados",
+        "Belarus",
+        "Belgium",
+        "Belize",
+        "Benin",
+        "Bermuda",
+        "Bhutan",
+        "Bolivia (Plurinational State of)",
+        "Bonaire, Sint Eustatius and Saba",
+        "Bosnia and Herzegovina",
+        "Botswana",
+        "Bouvet Island",
+        "Brazil",
+        "British Indian Ocean Territory (the)",
+        "Brunei Darussalam",
+        "Bulgaria",
+        "Burkina Faso",
+        "Burundi",
+        "Cabo Verde",
+        "Cambodia",
+        "Cameroon",
+        "Canada",
+        "Cayman Islands (the)",
+        "Central African Republic (the)",
+        "Chad",
+        "Chile",
+        "China",
+        "Christmas Island",
+        "Cocos (Keeling) Islands (the)",
+        "Colombia",
+        "Comoros (the)",
+        "Congo (the Democratic Republic of the)",
+        "Congo (the)",
+        "Cook Islands (the)",
+        "Costa Rica",
+        "Croatia",
+        "Cuba",
+        "Curaçao",
+        "Cyprus",
+        "Czechia",
+        "Côte d'Ivoire",
+        "Denmark",
+        "Djibouti",
+        "Dominica",
+        "Dominican Republic (the)",
+        "Ecuador",
+        "Egypt",
+        "El Salvador",
+        "Equatorial Guinea",
+        "Eritrea",
+        "Estonia",
+        "Eswatini",
+        "Ethiopia",
+        "Falkland Islands (the) [Malvinas]",
+        "Faroe Islands (the)",
+        "Fiji",
+        "Finland",
+        "France",
+        "French Guiana",
+        "French Polynesia",
+        "French Southern Territories (the)",
+        "Gabon",
+        "Gambia (the)",
+        "Georgia",
+        "Germany",
+        "Ghana",
+        "Gibraltar",
+        "Greece",
+        "Greenland",
+        "Grenada",
+        "Guadeloupe",
+        "Guam",
+        "Guatemala",
+        "Guernsey",
+        "Guinea",
+        "Guinea-Bissau",
+        "Guyana",
+        "Haiti",
+        "Heard Island and McDonald Islands",
+        "Holy See (the)",
+        "Honduras",
+        "Hong Kong",
+        "Hungary",
+        "Iceland",
+        "India",
+        "Indonesia",
+        "Iran (Islamic Republic of)",
+        "Iraq",
+        "Ireland",
+        "Isle of Man",
+        "Israel",
+        "Italy",
+        "Jamaica",
+        "Japan",
+        "Jersey",
+        "Jordan",
+        "Kazakhstan",
+        "Kenya",
+        "Kiribati",
+        "Korea (the Democratic People's Republic of)",
+        "Korea (the Republic of)",
+        "Kuwait",
+        "Kyrgyzstan",
+        "Lao People's Democratic Republic (the)",
+        "Latvia",
+        "Lebanon",
+        "Lesotho",
+        "Liberia",
+        "Libya",
+        "Liechtenstein",
+        "Lithuania",
+        "Luxembourg",
+        "Macao",
+        "Madagascar",
+        "Malawi",
+        "Malaysia",
+        "Maldives",
+        "Mali",
+        "Malta",
+        "Marshall Islands (the)",
+        "Martinique",
+        "Mauritania",
+        "Mauritius",
+        "Mayotte",
+        "Mexico",
+        "Micronesia (Federated States of)",
+        "Moldova (the Republic of)",
+        "Monaco",
+        "Mongolia",
+        "Montenegro",
+        "Montserrat",
+        "Morocco",
+        "Mozambique",
+        "Myanmar",
+        "Namibia",
+        "Nauru",
+        "Nepal",
+        "Netherlands (the)",
+        "New Caledonia",
+        "New Zealand",
+        "Nicaragua",
+        "Niger (the)",
+        "Nigeria",
+        "Niue",
+        "Norfolk Island",
+        "Northern Mariana Islands (the)",
+        "Norway",
+        "Oman",
+        "Pakistan",
+        "Palau",
+        "Palestine, State of",
+        "Panama",
+        "Papua New Guinea",
+        "Paraguay",
+        "Peru",
+        "Philippines (the)",
+        "Pitcairn",
+        "Poland",
+        "Portugal",
+        "Puerto Rico",
+        "Qatar",
+        "Republic of North Macedonia",
+        "Romania",
+        "Russian Federation (the)",
+        "Rwanda",
+        "Réunion",
+        "Saint Barthélemy",
+        "Saint Helena, Ascension and Tristan da Cunha",
+        "Saint Kitts and Nevis",
+        "Saint Lucia",
+        "Saint Martin (French part)",
+        "Saint Pierre and Miquelon",
+        "Saint Vincent and the Grenadines",
+        "Samoa",
+        "San Marino",
+        "Sao Tome and Principe",
+        "Saudi Arabia",
+        "Senegal",
+        "Serbia",
+        "Seychelles",
+        "Sierra Leone",
+        "Singapore",
+        "Sint Maarten (Dutch part)",
+        "Slovakia",
+        "Slovenia",
+        "Solomon Islands",
+        "Somalia",
+        "South Africa",
+        "South Georgia and the South Sandwich Islands",
+        "South Sudan",
+        "Spain",
+        "Sri Lanka",
+        "Sudan (the)",
+        "Suriname",
+        "Svalbard and Jan Mayen",
+        "Sweden",
+        "Switzerland",
+        "Syrian Arab Republic",
+        "Taiwan",
+        "Tajikistan",
+        "Tanzania, United Republic of",
+        "Thailand",
+        "Timor-Leste",
+        "Togo",
+        "Tokelau",
+        "Tonga",
+        "Trinidad and Tobago",
+        "Tunisia",
+        "Turkey",
+        "Turkmenistan",
+        "Turks and Caicos Islands (the)",
+        "Tuvalu",
+        "Uganda",
+        "Ukraine",
+        "United Arab Emirates (the)",
+        "United Kingdom of Great Britain and Northern Ireland (the)",
+        "United States Minor Outlying Islands (the)",
+        "United States of America (the)",
+        "Uruguay",
+        "Uzbekistan",
+        "Vanuatu",
+        "Venezuela (Bolivarian Republic of)",
+        "Viet Nam",
+        "Virgin Islands (British)",
+        "Virgin Islands (U.S.)",
+        "Wallis and Futuna",
+        "Western Sahara",
+        "Yemen",
+        "Zambia",
+        "Zimbabwe",
+        "Åland Islands"
+    ];
 
-priceBtn.addEventListener("click", function () {
-    priceDropdown.classList.toggle("hidden");
-    bbdropdown.classList.add("hidden");
-    homeStyleDropdown.classList.add("hidden");
-    moreDropdown.classList.add("hidden");
+    const selectCountry = document.getElementById("country");
 
-})
+    countryList.forEach(country => {
+        let option = document.createElement("option");
+        option.value = country;
+        option.text = country;
+        selectCountry.appendChild(option);
+    })
 
-const homeStyleBtn = document.getElementById("homeStyleBtn");
-const homeStyleDropdown = document.getElementById("homeStyleDropdown");
+    const nftSetPrice = document.getElementById("nft-setPrice");
+    const setPrice = document.getElementById("setPrice");
 
-homeStyleBtn.addEventListener("click", function () {
-    homeStyleDropdown.classList.toggle("hidden");
-    priceDropdown.classList.add("hidden");
-    bbdropdown.classList.add("hidden");
-    moreDropdown.classList.add("hidden");
+    nftSetPrice.addEventListener("click", function () {
+        setPrice.classList.toggle("hidden");
+    })
 
-})
-
-// Home style select/deselect
-let selectAllbtn = document.getElementById("selectAllbtn");
-let selectAll = document.getElementById("selectAll");
-
-const select = () => {
-    let choices = document.querySelectorAll(".home-choices");
-    for (let i = 0; i < choices.length; i++) {
-        choices[i].checked = true;
-    }
 }
-
-const deselect = () => {
-    let choices = document.querySelectorAll(".home-choices");
-    for (let i = 0; i < choices.length; i++) {
-        choices[i].checked = false;
-    }
-}
-
-selectAllbtn.addEventListener("click", function () {
-
-    switch (selectAllbtn.checked) {
-        case (true):
-            select();
-            selectAll.innerHTML = "Deselect All";
-            break;
-        case (false):
-            deselect();
-            selectAll.innerHTML = "Select All";
-    }
-})
-
-const moreBtn = document.getElementById("moreBtn");
-const moreDropdown = document.getElementById("moreDropdown");
-
-moreBtn.addEventListener("click", function () {
-    if (window.innerWidth > 767) {
-        moreDropdown.classList.toggle("hidden");
-        priceDropdown.classList.add("hidden");
-        homeStyleDropdown.classList.add("hidden");
-        bbdropdown.classList.add("hidden");
-    }
-})
