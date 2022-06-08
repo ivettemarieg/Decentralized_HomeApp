@@ -15,16 +15,20 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="h-full">
+<body class="h-full dashboard">
     <div class="min-h-full">
         <app-navbar></app-navbar>
 
         <main>
             <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-                <div class="bg-white">
+                <div class="bg-white shadow-lg rounded">
                     <div class="max-w-2xl mx-auto pb-10 pt-8 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-                        <h1 id="dashboard" class="text-5xl font-bold text-black font-serif tracking-wide">Dashboard
-                        </h1>
+                        <div class="flex flex-col">
+                            <h1 id="dashboard" class="text-5xl font-bold text-black tracking-wide">
+                                Dashboard
+                            </h1>
+                            <div class="mt-2 flex-grow border-2 border-teal-400 bg-teal-400 shadow-lg"></div>
+                        </div>
 
                         <!-- <div class="mt-2 flex-grow border-2 border-teal-400 bg-teal-400"></div> -->
 
@@ -410,10 +414,23 @@
                             </div>
                         </div>
 
-                        <!-- Card List -->
+                        <h2 class="mt-10 font-bold track-wide text-4xl">Available Now</h2>
+                        <div class="mt-2 flex-grow border-2 border-teal-400 bg-teal-400 shadow-lg"></div>
+
+
+                        <!-- Available Card List -->
                         <div class="flex">
                             <div class="max-w-full mx-auto grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:max-w-none"
-                                id="nft-list">
+                                id="nft-available-list">
+                            </div>
+                        </div>
+
+                        <h2 class="mt-20 font-bold track-wide text-4xl">Bid to Win!</h2>
+                        <div class="mt-2 flex-grow border-2 border-teal-400 bg-teal-400 shadow-2xl"></div>
+
+                        <div class="flex">
+                            <div class="max-w-full mx-auto grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:max-w-none"
+                                id="nft-bidding-list">
                             </div>
                         </div>
 
